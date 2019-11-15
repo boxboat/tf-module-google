@@ -6,6 +6,7 @@ variable "name" {}
 variable "image" {}
 variable "disk" {}
 variable "public_key" {}
+variable "ssh_user" {}
 
 provider "google" {
   credentials = "${var.credentials}"
@@ -26,7 +27,7 @@ resource "google_compute_instance" "instance" {
   }
 
   metadata = {
-    ssh-keys = "${var.gce_ssh_user}:${var.public_key}"
+    ssh-keys = "${var.ssh_user}:${var.public_key}"
   }
 
   network_interface {
