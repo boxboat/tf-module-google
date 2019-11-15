@@ -23,6 +23,7 @@ resource "google_compute_instance" "instance" {
   boot_disk {
     initialize_params {
       image = "${var.image}"
+      size = "${var.disk}"
     }
   }
 
@@ -37,9 +38,6 @@ resource "google_compute_instance" "instance" {
     }
   }
 
-  initialize_params {
-    size = "${var.disk}"
-  }
 }
 
 output "private_ip" {
