@@ -41,13 +41,13 @@ resource "google_compute_instance" "instance" {
 }
 
 output "private_ip" {
-  value = "${google_compute_instance.instance.nat_ip}"
+  value = "${google_compute_instance.instance.network_interface.0.network_ip}"
 }
 
 output "public_ip" {
-   value = ["${google_compute_instance.instance.*.network_interface.0.access_config.0.assigned_nat_ip}"]
+   value = "${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip}"
 }
 
 output "hostname" {
-  value = "${google_compute_instance.instance.hostname}"
+  value = "${google_compute_instance.instance.network_interface.0.access_config.0.public_ptr_domain_name}"
 }
