@@ -11,7 +11,7 @@ variable "ssh_user" {}
 provider "google" {
   credentials = "${var.credentials}"
   project     = "${var.project}"
-  region      = "${var.region}"
+  region      = "${regex("(.*)-", var.zone)}[0]"
   zone        = "${var.zone}"
 }
 
@@ -28,7 +28,7 @@ resource "google_compute_instance" "instance" {
   }
 
   metadata = {
-    ssh-keys = "${var.ssh_user}:${var.public_key}"
+    ssh-keys = "ubuntu:${var.public_key}"
   }
 
   network_interface {
