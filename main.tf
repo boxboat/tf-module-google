@@ -6,7 +6,6 @@ variable "name" {}
 variable "image" {}
 variable "disk" {}
 variable "public_key" {}
-variable "ssh_user" {}
 
 provider "google" {
   credentials = "${var.credentials}"
