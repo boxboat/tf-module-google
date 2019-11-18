@@ -1,11 +1,17 @@
 variable "credentials" {}
 variable "project" {}
-variable "region" {}
 variable "zone" {}
 variable "name" {}
-variable "image" {}
-variable "disk" {}
+variable "image" {
+  default = "ubuntu-1804-lts"
+}
+variable "disk" {
+  default = "10"
+}
 variable "public_key" {}
+variable "ssh_user" {
+  default = "ubuntu"
+}
 
 provider "google" {
   credentials = "${var.credentials}"
@@ -27,7 +33,7 @@ resource "google_compute_instance" "instance" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${var.public_key}"
+    ssh-keys = "${var.ssh_user}:${var.public_key}"
   }
 
   network_interface {
