@@ -12,6 +12,7 @@ variable "public_key" {}
 variable "ssh_user" {
   default = "ubuntu"
 }
+variable "cloud_init" {}
 
 provider "google" {
   credentials = "${var.credentials}"
@@ -34,6 +35,7 @@ resource "google_compute_instance" "instance" {
 
   metadata = {
     ssh-keys = "${var.ssh_user}:${var.public_key}"
+    user-data = "${var.cloud_init}"
   }
 
   network_interface {
@@ -42,6 +44,7 @@ resource "google_compute_instance" "instance" {
       // Ephemeral IP - leaving this block empty will generate a new external IP and assign it to the machine
     }
   }
+
 
 }
 
