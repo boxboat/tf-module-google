@@ -16,7 +16,7 @@ variable "ssh_user" {
 provider "google" {
   credentials = "${var.credentials}"
   project     = "${var.project}"
-  region      = "${regex("(.*)-", var.zone)}[0]"
+  region      = replace(var.zone, "/-[a-z]/", "")
   zone        = "${var.zone}"
 }
 
