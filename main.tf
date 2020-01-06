@@ -40,7 +40,7 @@ resource "google_compute_instance" "instance" {
 
   network_interface {
     network       = "default"
-    access_config = {
+    access_config {
       // Ephemeral IP - leaving this block empty will generate a new external IP and assign it to the machine
     }
   }
