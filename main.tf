@@ -22,7 +22,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "instance" {
-  name         = "hf-${var.name}"
+  name         = "${var.name}"
   machine_type = "n1-standard-1"
   tags         = ["hobbyfarm"]
 
