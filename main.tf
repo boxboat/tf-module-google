@@ -2,7 +2,7 @@ variable "credentials" {}
 variable "project" {}
 variable "zone" {}
 variable "name" {}
-variable "acces_code" {
+variable "access_code" {
   default = "access:unassigned"
 }
 variable "course" {
@@ -31,7 +31,7 @@ resource "google_compute_instance" "instance" {
   name         = "${var.name}"
   machine_type = "n1-standard-1"
   tags         = ["hobbyfarm"]
-  labels       = ["hobbyfarm", "${var.acces_code}", "${var.course}"]
+  labels       = ["hobbyfarm", "${var.access_code}", "${var.course}"]
   boot_disk {
     initialize_params {
       image = "${var.image}"
