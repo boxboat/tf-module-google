@@ -31,7 +31,7 @@ resource "google_compute_instance" "instance" {
   name         = "${var.name}"
   machine_type = "n1-standard-1"
   tags         = ["hobbyfarm"]
-  labels = ["hobbyfarm", "${var.accesCode}", "${var.course}"]
+  labels       = ["hobbyfarm", "${var.accesCode}", "${var.course}"]
   boot_disk {
     initialize_params {
       image = "${var.image}"
