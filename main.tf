@@ -3,7 +3,7 @@ variable "project" {}
 variable "zone" {}
 variable "name" {}
 variable "access_code" {
-  default = "access:unassigned"
+  default = ""
 }
 variable "course" {
   default = "course:none"
