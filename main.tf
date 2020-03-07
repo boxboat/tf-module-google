@@ -32,8 +32,8 @@ resource "google_compute_instance" "instance" {
   machine_type = "n1-standard-1"
   tags         = ["hobbyfarm"]
   labels       = {
-    "access_code": "${var.access_code}",
-    "course": "${var.course}"
+    access_code = "${var.access_code}"
+    course = "${var.course}"
   }
   boot_disk {
     initialize_params {
