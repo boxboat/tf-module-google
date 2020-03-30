@@ -5,6 +5,9 @@ variable "name" {}
 variable "access_code" {
   default = ""
 }
+variable "machine_type" {
+  default = "n1-standard-1"
+}
 variable "course" {
   default = "course:none"
 }
@@ -29,7 +32,7 @@ provider "google" {
 
 resource "google_compute_instance" "instance" {
   name         = "${var.name}"
-  machine_type = "n1-standard-1"
+  machine_type = "${var.machine_type}"
   tags         = ["hobbyfarm"]
   labels       = {
     access_code = "${var.access_code}"
