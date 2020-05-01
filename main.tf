@@ -30,6 +30,11 @@ provider "google" {
   zone        = "${var.zone}"
 }
 
+resource "random_string" "editor" {
+  length = 16
+  special = false
+}
+
 resource "google_compute_instance" "instance" {
   name         = "${var.name}"
   machine_type = "${var.machine_type}"
@@ -47,7 +52,7 @@ resource "google_compute_instance" "instance" {
 
   metadata = {
     ssh-keys = "${var.ssh_user}:${var.public_key}"
-    user-data = "${var.cloud_init}"
+    user-data = "${replace(${var.cloud_init}, "EDITOR_PASSWORD", ${random_string.editor.result}}"
   }
 
   network_interface {
@@ -56,8 +61,6 @@ resource "google_compute_instance" "instance" {
       // Ephemeral IP - leaving this block empty will generate a new external IP and assign it to the machine
     }
   }
-
-
 }
 
 output "private_ip" {
@@ -70,4 +73,8 @@ output "public_ip" {
 
 output "hostname" {
   value = "${google_compute_instance.instance.network_interface.0.access_config.0.public_ptr_domain_name}"
+}
+
+output "editor_password" {
+  value = "${random_string.editor.result}"
 }
