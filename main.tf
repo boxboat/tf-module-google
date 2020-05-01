@@ -31,7 +31,7 @@ provider "google" {
 }
 
 resource "random_string" "editor" {
-  length = 16
+  length  = 16
   special = false
 }
 
@@ -39,24 +39,24 @@ resource "google_compute_instance" "instance" {
   name         = "${var.name}"
   machine_type = "${var.machine_type}"
   tags         = ["hobbyfarm"]
-  labels       = {
+  labels = {
     access_code = "${var.access_code}"
-    course = "${var.course}"
+    course      = "${var.course}"
   }
   boot_disk {
     initialize_params {
       image = "${var.image}"
-      size = "${var.disk}"
+      size  = "${var.disk}"
     }
   }
 
   metadata = {
-    ssh-keys = "${var.ssh_user}:${var.public_key}"
-    user-data = "${replace(${var.cloud_init}, "EDITOR_PASSWORD", ${random_string.editor.result})}"
+    ssh-keys  = "${var.ssh_user}:${var.public_key}"
+    user-data = "${replace(var.cloud_init, "EDITOR_PASSWORD", random_string.editor.result)}"
   }
 
   network_interface {
-    network       = "default"
+    network = "default"
     access_config {
       // Ephemeral IP - leaving this block empty will generate a new external IP and assign it to the machine
     }
@@ -68,7 +68,7 @@ output "private_ip" {
 }
 
 output "public_ip" {
-   value = "${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip}"
+  value = "${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip}"
 }
 
 output "hostname" {
