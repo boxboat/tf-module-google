@@ -52,7 +52,7 @@ resource "google_compute_instance" "instance" {
 
   metadata = {
     ssh-keys = "${var.ssh_user}:${var.public_key}"
-    user-data = "${var.cloud_init} ${random_string.editor.result}"
+    user-data = "${replace(${var.cloud_init}, "EDITOR_PASSWORD", ${random_string.editor.result}}"
   }
 
   network_interface {
