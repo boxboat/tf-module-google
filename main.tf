@@ -2,14 +2,10 @@ variable "credentials" {}
 variable "project" {}
 variable "zone" {}
 variable "name" {}
-variable "access_code" {
-  default = ""
-}
+variable "labels" {}
+variable "tags" {}
 variable "machine_type" {
   default = "n1-standard-1"
-}
-variable "course" {
-  default = "course:none"
 }
 variable "image" {
   default = "ubuntu-1804-lts"
@@ -38,11 +34,8 @@ resource "random_string" "editor" {
 resource "google_compute_instance" "instance" {
   name         = "${var.name}"
   machine_type = "${var.machine_type}"
-  tags         = ["hobbyfarm"]
-  labels = {
-    access_code = "${var.access_code}"
-    course      = "${var.course}"
-  }
+  tags         = "${var.tags}"
+  labels       = "${var.labels}"
   boot_disk {
     initialize_params {
       image = "${var.image}"
