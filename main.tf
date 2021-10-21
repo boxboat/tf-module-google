@@ -19,7 +19,7 @@ variable "ssh_user" {
 }
 variable "cloud_init" {}
 variable "virtualization" {
-  default = false
+  default = true # TODO: should probably default to false before going to prod
 }
 
 provider "google" {
