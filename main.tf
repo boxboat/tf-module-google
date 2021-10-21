@@ -18,6 +18,9 @@ variable "ssh_user" {
   default = "ubuntu"
 }
 variable "cloud_init" {}
+variable "virtualization" {
+  default = false
+}
 
 provider "google" {
   credentials = "${var.credentials}"
@@ -53,6 +56,9 @@ resource "google_compute_instance" "instance" {
     access_config {
       // Ephemeral IP - leaving this block empty will generate a new external IP and assign it to the machine
     }
+  }
+  advanced_machine_features {
+    enable_nested_virtualization = var.virtualization
   }
 }
 
