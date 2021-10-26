@@ -58,7 +58,7 @@ resource "google_compute_instance" "instance" {
     }
   }
   advanced_machine_features {
-    enable_nested_virtualization = var.virtualization
+    enable_nested_virtualization = "${var.virtualization}"
   }
 }
 
