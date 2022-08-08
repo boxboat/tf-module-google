@@ -24,7 +24,7 @@ variable "ssh_user" {
 variable "cloud_init" {}
 
 provider "google" {
-  version     = "2.20.3"
+  version     = "2.9.1"
   credentials = "${var.credentials}"
   project     = "${var.project}"
   region      = "${replace(var.zone, "/-[a-z]$/", "")}"
